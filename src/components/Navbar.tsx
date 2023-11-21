@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/auth/AuthContextsProvider";
 
 const pages = [{ title: "Products", link: "/", id: 1 }];
 
@@ -36,9 +37,10 @@ const settings = [
 ];
 
 function Navbar() {
-  let isAdmin = false;
+  const { logout, user, isAdmin } = useAuth();
+
   function getPages() {
-    if (isAdmin) {
+    if (isAdmin()) {
       return pages.concat(adminPages);
     } else {
       return pages;
@@ -162,7 +164,12 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src={`${
+                    user ? user.photoURL : "/static/images/avatar/2.jpg"
+                  }`}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -184,7 +191,13 @@ function Navbar() {
               {settings.map((setting) => (
                 <div>
                   {!setting.link ? (
-                    <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                    <MenuItem
+                      key={setting.id}
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        logout();
+                      }}
+                    >
                       <Typography textAlign="center">
                         {setting.title}
                       </Typography>
