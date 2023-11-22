@@ -39,7 +39,6 @@ const settings = [
 function Navbar() {
   const { logout, user, isAdmin, login } = useAuth();
 
-
   function getPages() {
     if (isAdmin()) {
       return pages.concat(adminPages);
@@ -69,6 +68,8 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  console.log(user);
 
   return (
     <AppBar position="static">
@@ -163,9 +164,9 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <span style={{marginRight: "2rem"}}>{`${
-                    user ? user.displayName : "No user"
-                  }`}</span>
+            <span style={{ marginRight: "2rem" }}>{`${
+              user ? user.displayName : "No user"
+            }`}</span>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar

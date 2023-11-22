@@ -5,8 +5,11 @@ import AddPage from "../pages/AddPage";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
+import { useAuth } from "../contexts/auth/AuthContextsProvider";
+import EditPage from "../pages/EditPage";
 
 const MainRoutes = () => {
+  const { isAdmin } = useAuth();
   return (
     <Routes>
       <Route path="/" element={<ProductsPage />} />
@@ -20,6 +23,7 @@ const MainRoutes = () => {
           </AdminProtectedRoutes>
         }
       ></Route>
+      <Route path="/edit/:id" element={isAdmin() ? <EditPage /> : null} />
     </Routes>
   );
 };

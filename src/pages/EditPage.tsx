@@ -7,20 +7,14 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEvent,
-  useState,
-} from "react";
-import { useProducts } from "../contexts/products/ProductsContextProvider";
-import { notify } from "../components/Toastify";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { categories } from "../utils/consts";
+import { notify } from "../components/Toastify";
+import { useProducts } from "../contexts/products/ProductsContextProvider";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddPage = () => {
-  const { addProduct } = useProducts();
-
+const EditPage = () => {
+  const { oneProduct, getOneProduct, editProduct } = useProducts();
   const [product, setProduct] = useState({
     title: "",
     price: 0,
@@ -28,6 +22,18 @@ const AddPage = () => {
     category: "",
     description: "",
   });
+
+  const nav = useNavigate();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    getOneProduct(id!);
+  }, []);
+
+  useEffect(() => {
+    oneProduct && setProduct(oneProduct);
+  }, [oneProduct]);
 
   const handleChange = (e: any) => {
     setProduct({
@@ -37,21 +43,9 @@ const AddPage = () => {
     console.log(product);
   };
 
-  const nav = useNavigate();
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      !product.title.trim() ||
-      !product.price ||
-      !product.category.trim() ||
-      !product.description.trim() ||
-      !product.image.trim()
-    ) {
-      notify("Заполните поля!");
-      return;
-    }
-    addProduct(product);
+    editProduct(id!, product);
     nav("/");
   };
   return (
@@ -81,8 +75,10 @@ const AddPage = () => {
         type="text"
         variant="standard"
         name="title"
+        value={product.title}
       />
       <TextField
+        value={product.price}
         onChange={handleChange}
         id="standard-search"
         label="Price"
@@ -106,6 +102,7 @@ const AddPage = () => {
         </Select>
       </FormControl>
       <TextField
+        value={product.description}
         onChange={handleChange}
         id="standard-search"
         label="Description"
@@ -114,6 +111,7 @@ const AddPage = () => {
         name="description"
       />
       <TextField
+        value={product.image}
         onChange={handleChange}
         id="standard-search"
         label="Image"
@@ -122,10 +120,10 @@ const AddPage = () => {
         name="image"
       />
       <Button type="submit" variant="contained">
-        Login
+        Save changes
       </Button>
     </Box>
   );
 };
 
-export default AddPage;
+export default EditPage;
