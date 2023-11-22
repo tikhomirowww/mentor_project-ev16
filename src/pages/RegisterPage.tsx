@@ -2,8 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import { authContext, useAuth } from "../contexts/auth/AuthContextsProvider";
-import { AuthValuesTypes } from "../contexts/auth/auth.types";
+import { useAuth } from "../contexts/auth/AuthContextsProvider";
 import { Navigate } from "react-router-dom";
 
 export default function RegisterPage() {
@@ -31,6 +30,16 @@ export default function RegisterPage() {
       component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "25ch" },
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "20%",
+        margin: "auto",
+        marginTop: "100px",
+        border: "2px solid #1976D2",
+        borderRadius: "15px",
+        gap: "5px",
+        padding: "20px",
       }}
       noValidate
       autoComplete="off"
