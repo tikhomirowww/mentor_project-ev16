@@ -31,6 +31,16 @@ const AddPage = () => {
       component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "25ch" },
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "20%",
+        margin: "auto",
+        marginTop: "100px",
+        border: "2px solid #1976D2",
+        borderRadius: "15px",
+        gap: "5px",
+        padding: "20px",
       }}
       noValidate
       autoComplete="off"

@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "../pages/ProductsPage";
-import AuthPage from "../pages/RegisterPage";
 import AddPage from "../pages/AddPage";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import RegisterPage from "../pages/RegisterPage";
