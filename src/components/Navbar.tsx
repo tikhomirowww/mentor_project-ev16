@@ -37,7 +37,8 @@ const settings = [
 ];
 
 function Navbar() {
-  const { logout, user, isAdmin } = useAuth();
+  const { logout, user, isAdmin, login } = useAuth();
+
 
   function getPages() {
     if (isAdmin()) {
@@ -162,6 +163,9 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <span style={{marginRight: "2rem"}}>{`${
+                    user ? user.displayName : "No user"
+                  }`}</span>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
