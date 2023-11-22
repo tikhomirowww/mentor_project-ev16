@@ -39,6 +39,7 @@ const settings = [
 function Navbar() {
   const { logout, user, isAdmin, login } = useAuth();
 
+
   function getPages() {
     if (isAdmin()) {
       return pages.concat(adminPages);
