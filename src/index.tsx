@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextsProvider from "./contexts/auth/AuthContextsProvider";
 import Toastify from "./components/Toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Pagination } from "@mui/material";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,6 +16,7 @@ root.render(
     <BrowserRouter>
       <App />
       <Toastify />
+      <Pagination />
     </BrowserRouter>
   </AuthContextsProvider>
 );
