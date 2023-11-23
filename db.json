@@ -1,3 +1,25 @@
 {
-  "products": []
+  "products": [],
+  "categories": [
+    {
+      "title": "jsfj",
+      "value": "jsfj",
+      "id": 1
+    },
+    {
+      "title": "Boys",
+      "value": "boys",
+      "id": 2
+    },
+    {
+      "title": "Pets",
+      "value": "pets",
+      "id": 3
+    },
+    {
+      "title": "csdlmsvsl",
+      "value": "csdlmsvsl",
+      "id": 4
+    }
+  ]
 }

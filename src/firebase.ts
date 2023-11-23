@@ -7,12 +7,13 @@ import { lstat } from "fs";
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_APIKEY,
-  authDomain: process.env.REACT_APP_AUTHDOMAIN,
-  projectId: process.env.REACT_APP_PROJECTID,
-  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_APPID,
+  apiKey: "AIzaSyC6367x7SO7plpfjG4vVV8uQSt-Ev4nqZU",
+  authDomain: "mentor-project-f8898.firebaseapp.com",
+  projectId: "mentor-project-f8898",
+  storageBucket: "mentor-project-f8898.appspot.com",
+  messagingSenderId: "615506612441",
+  appId: "1:615506612441:web:da0e9a9cffee80d08b2ec8",
+  measurementId: "G-BSWE93B8DN"
 };
 
 // Initialize Firebase

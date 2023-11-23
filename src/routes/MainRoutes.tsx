@@ -18,9 +18,9 @@ const MainRoutes = () => {
       <Route
         path="/add"
         element={
-          <AdminProtectedRoutes>
+          // <AdminProtectedRoutes>
             <AddPage />
-          </AdminProtectedRoutes>
+          /* </AdminProtectedRoutes> */
         }
       ></Route>
       <Route path="/edit/:id" element={isAdmin() ? <EditPage /> : null} />

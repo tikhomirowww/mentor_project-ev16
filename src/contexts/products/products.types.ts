@@ -6,7 +6,10 @@ export interface IProduct {
   image: string;
   id?: string;
 }
-
+export interface ICategory{
+  title: string;
+  value: string;
+}
 export interface IProductsValues {
   products: IProduct[];
   oneProduct: IProduct | null;
@@ -15,14 +18,18 @@ export interface IProductsValues {
   getOneProduct: (id: string) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
   getProducts: () => Promise<void>;
+  getCategories: () => Promise<void>;
+  categories: ICategory[];
+  createCategory: (obj: ICategory)=> Promise<void>;
 }
 
 export type STATE = {
   products: IProduct[];
   oneProduct: IProduct | null;
+  categories: ICategory[];
 };
 
 export type ACTION = {
-  type: "GET_PRODUCTS" | "GET_ONE_PRODUCT";
+  type: "GET_PRODUCTS" | "GET_ONE_PRODUCT" | "GET_CATEGORIES";
   payload: any;
 };

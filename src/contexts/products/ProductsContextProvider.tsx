@@ -2,13 +2,14 @@ import React, { createContext, useContext, useReducer } from "react";
 import { IAuth } from "../auth/auth.types";
 import { ACTION, IProduct, IProductsValues, STATE } from "./products.types";
 import axios from "axios";
-import { API } from "../../utils/consts";
-
+import { API, API_categories } from "../../utils/consts";
+import { ICategory } from "./products.types";
 export const productsContext = createContext<IProductsValues | null>(null);
 
 const INIT_STATE: STATE = {
   products: [],
   oneProduct: null,
+  categories: [],
 };
 
 function reducer(state = INIT_STATE, action: ACTION): STATE {
@@ -17,6 +18,8 @@ function reducer(state = INIT_STATE, action: ACTION): STATE {
       return { ...state, products: action.payload };
     case "GET_ONE_PRODUCT":
       return { ...state, oneProduct: action.payload };
+    case "GET_CATEGORIES":
+      return {...state, categories: action.payload}
     default:
       return state;
   }
@@ -52,6 +55,13 @@ const ProductsContextProvider = ({ children }: IAuth) => {
       payload: data,
     });
   }
+  async function getCategories(){
+    const { data } = await axios.get(API_categories);
+    dispatch({
+      type: "GET_CATEGORIES",
+      payload: data,
+    });
+}
 
   async function editProduct(id: string, editedProduct: IProduct) {
     await axios.patch(API + "/" + id, editedProduct);
@@ -62,7 +72,9 @@ const ProductsContextProvider = ({ children }: IAuth) => {
     await axios.delete(API + "/" + id);
     getProducts();
   }
-
+  async function createCategory(obj:ICategory){
+    await axios.post(API_categories,obj)
+  }
   return (
     <productsContext.Provider
       value={{
@@ -73,6 +85,9 @@ const ProductsContextProvider = ({ children }: IAuth) => {
         editProduct,
         oneProduct: state.oneProduct,
         deleteProduct,
+        getCategories,
+        categories: state.categories,
+        createCategory,
       }}
     >
       {children}

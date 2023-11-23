@@ -10,8 +10,11 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const data = new FormData(e.currentTarget);
+  
+    // Выводим данные в консоль для отладки
+    console.log(data.get("email"));
+  
     register(
       data.get("email") as string,
       data.get("password") as string,
@@ -19,6 +22,7 @@ export default function RegisterPage() {
       data.get("photoURL") as string
     );
   };
+  
 
   if (user) {
     return <Navigate to="/" />;

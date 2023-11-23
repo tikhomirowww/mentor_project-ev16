@@ -11,16 +11,17 @@ import React, {
   ChangeEvent,
   ChangeEventHandler,
   FormEvent,
+  useEffect,
   useState,
 } from "react";
 import { useProducts } from "../contexts/products/ProductsContextProvider";
 import { notify } from "../components/Toastify";
 import { useNavigate } from "react-router-dom";
-import { categories } from "../utils/consts";
-
+import { API_categories, categories } from "../utils/consts";
+import axios from "axios";
 const AddPage = () => {
-  const { addProduct } = useProducts();
-
+  const { addProduct, getCategories, categories,createCategory } = useProducts();
+  const [category, setCategory] = useState("")
   const [product, setProduct] = useState({
     title: "",
     price: 0,
@@ -36,7 +37,9 @@ const AddPage = () => {
     });
     console.log(product);
   };
-
+  useEffect(()=>{
+    getCategories()
+  },[])
   const nav = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,6 +106,10 @@ const AddPage = () => {
           {categories.map((cat) => (
             <MenuItem value={cat.value}>{cat.title}</MenuItem>
           ))}
+          <div className="continer">
+            <input style={{marginLeft:"7%",}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{setCategory(e.target.value)}} value={category}/>
+            <button onClick={(e) => {createCategory({title:category,value:category.toLowerCase()});setCategory(" ")}}>add</button>
+          </div>
         </Select>
       </FormControl>
       <TextField

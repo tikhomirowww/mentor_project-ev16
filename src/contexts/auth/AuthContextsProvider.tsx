@@ -11,7 +11,8 @@ import {
 import { auth } from "../../firebase";
 import { log } from "console";
 import { notify } from "../../components/Toastify";
-import { ADMINS } from "../../utils/consts";
+import { ADMINS, API_categories } from "../../utils/consts";
+import axios from "axios";
 
 export const authContext = createContext<AuthValuesTypes | null>(null);
 
@@ -25,7 +26,12 @@ export function useAuth() {
 
 const AuthContextsProvider = ({ children }: IAuth) => {
   const [user, setUser] = useState<User | null>(null);
-
+  
+    async function getCategories(){
+        let res = await axios.get(API_categories)
+        console.log(res)
+    }
+    
   async function register(
     email: string,
     password: string,
