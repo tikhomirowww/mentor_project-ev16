@@ -15,6 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/auth/AuthContextsProvider";
 import Livesearch from "./Livesearch";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 const pages = [{ title: "Products", link: "/", id: 1 }];
 
@@ -164,6 +165,12 @@ function Navbar() {
               </Link>
             ))}
           </Box>
+
+          {user && (
+            <Link to="/cart">
+              <LocalMallIcon sx={{ marginRight: "30px", color: "white" }} />
+            </Link>
+          )}
 
           <Livesearch />
 

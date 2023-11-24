@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useInRouterContext } from "react-router-dom";
 import ProductsPage from "../pages/ProductsPage";
 import AddPage from "../pages/AddPage";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
@@ -7,9 +7,11 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import { useAuth } from "../contexts/auth/AuthContextsProvider";
 import EditPage from "../pages/EditPage";
+import CartPage from "../pages/CartPage";
+import SuccessPage from "../pages/SuccessPage";
 
 const MainRoutes = () => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   return (
     <Routes>
       <Route path="/" element={<ProductsPage />} />
@@ -24,6 +26,8 @@ const MainRoutes = () => {
         }
       ></Route>
       <Route path="/edit/:id" element={isAdmin() ? <EditPage /> : null} />
+      <Route path="/cart" element={user && <CartPage />} />
+      <Route path="/success" element={<SuccessPage />} />
     </Routes>
   );
 };

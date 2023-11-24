@@ -13,11 +13,17 @@ import { Link } from "react-router-dom";
 import PaginationOutlined from "../components/Pagination";
 import { CircleLoader } from "react-spinners";
 import { useAuth } from "../contexts/auth/AuthContextsProvider";
+import { useCartContext } from "../contexts/cart/CartContextProvideer";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 const ProductsList = () => {
   const { getProducts, products, deleteProduct } = useProducts();
 
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
+
+  const { isAlreadyInCart, deleteProductFromCart, addProductToCart } =
+    useCartContext();
 
   useEffect(() => {
     getProducts();
@@ -54,6 +60,19 @@ const ProductsList = () => {
                 {card.description}
               </Typography>
             </CardContent>
+            {user && (
+              <div>
+                {isAlreadyInCart(+card.id!) ? (
+                  <div onClick={() => deleteProductFromCart(+card.id!)}>
+                    <RemoveShoppingCartIcon color="error" />
+                  </div>
+                ) : (
+                  <div onClick={() => addProductToCart(card)}>
+                    <AddShoppingCartIcon />
+                  </div>
+                )}
+              </div>
+            )}
             {isAdmin() && (
               <CardActions>
                 <Link to={`/edit/${card.id}`}>

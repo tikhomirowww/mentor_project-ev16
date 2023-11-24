@@ -7,17 +7,20 @@ import AuthContextsProvider from "./contexts/auth/AuthContextsProvider";
 import Toastify from "./components/Toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductsContextProvider from "./contexts/products/ProductsContextProvider";
+import CartContextProvideer from "./contexts/cart/CartContextProvideer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <BrowserRouter>
-    <ProductsContextProvider>
-      <AuthContextsProvider>
-        <App />
-        <Toastify />
-      </AuthContextsProvider>
-    </ProductsContextProvider>
+    <CartContextProvideer>
+      <ProductsContextProvider>
+        <AuthContextsProvider>
+          <App />
+          <Toastify />
+        </AuthContextsProvider>
+      </ProductsContextProvider>
+    </CartContextProvideer>
   </BrowserRouter>
 );
