@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/auth/AuthContextsProvider";
+import Livesearch from "./Livesearch";
 
 const pages = [{ title: "Products", link: "/", id: 1 }];
 
@@ -130,6 +131,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -151,7 +153,7 @@ function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {getPages().map((page) => (
-              <Link to={page.link}>
+              <Link key={page.id} to={page.link}>
                 <Button
                   key={page.id}
                   onClick={handleCloseNavMenu}
@@ -162,6 +164,8 @@ function Navbar() {
               </Link>
             ))}
           </Box>
+
+          <Livesearch />
 
           <Box sx={{ flexGrow: 0 }}>
             <span style={{ marginRight: "2rem" }}>{`${
@@ -194,7 +198,7 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <div>
+                <div key={setting.id}>
                   {!setting.link ? (
                     <MenuItem
                       key={setting.id}
