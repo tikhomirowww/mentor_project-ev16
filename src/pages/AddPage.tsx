@@ -122,7 +122,7 @@ const AddPage = () => {
         name="image"
       />
       <Button type="submit" variant="contained">
-        Login
+        Add
       </Button>
     </Box>
   );

@@ -12,12 +12,12 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <ProductsContextProvider>
-    <AuthContextsProvider>
-      <BrowserRouter>
+  <BrowserRouter>
+    <ProductsContextProvider>
+      <AuthContextsProvider>
         <App />
         <Toastify />
-      </BrowserRouter>
-    </AuthContextsProvider>
-  </ProductsContextProvider>
+      </AuthContextsProvider>
+    </ProductsContextProvider>
+  </BrowserRouter>
 );
